@@ -46,6 +46,6 @@ class Loss(nn.Module):
 
 
 preprocess = transforms.Compose([
-    torchvision.transforms.resize((720, 405)),
+    torchvision.transforms.resize((360, 200)),
     torchvision.transforms.ToTensor()
 ])

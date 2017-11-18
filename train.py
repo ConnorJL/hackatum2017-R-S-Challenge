@@ -16,12 +16,22 @@ master_list_location = "/home/connor/Projects/hackatum2017"
 if net == "politically_correct":
     from politically_import import network, preprocess, loss
 
+def save_checkpoint(state, filename='checkpoint'):
+    filename = os.path.join(net, filename+ "_" + str(state["epoch"]) + ".pth.tar")
+    torch.save(state, filename)
+
+
 if not os.path.exists(net):
     os.mkdir(net)
     restore = False
 else:
-    # restore = attempt_to_restore()
-    pass
+    restore = True
+    l = []
+    for f in os.listdir(net):
+        l.append(int(f.split(".")[0].split("_")[1]))
+    l.sort()
+    resume_path = os.path.join(net, "checkpoint" + "_"+ str(l[-1]) + ".pth.tar")
+
 
 if __name__ == "__main__":
     model = network()
@@ -32,12 +42,15 @@ if __name__ == "__main__":
     print("Number of parameters: ", sum(param.numel() for param in model.parameters()))
 
     if restore:
-        model.load_state_dict(statestuff)
-        optimizier.restore_optim
-
+        print("=> loading checkpoint '{}'".format(resume_path))
+        checkpoint = torch.load(args.resume)
+        start_epoch = checkpoint['epoch']
+        model.load_state_dict(checkpoint['state_dict'])
+        optimizer.load_state_dict(checkpoint['optimizer'])
+        print("=> loaded checkpoint '{}' (epoch {})".format(resume_path, checkpoint['epoch']))
     model.cuda()
 
-    for i in range(num_epochs):
+    for i in range(start_epoch, num_epochs):
         for e in train_dataloader:
             model.zero_grads()
 
@@ -46,3 +59,11 @@ if __name__ == "__main__":
 
             loss.backward()
             optmizer.step()
+
+            save_checkpoint({
+            'epoch': epoch + 1,
+            'arch': net,
+            'state_dict': model.state_dict(),
+            'optimizer' : optimizer.state_dict(),
+            })
+
