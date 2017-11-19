@@ -20,6 +20,7 @@ class RSDataset(Dataset):
             self.labels = pkl.load(f)
         self.transform = transform
         self.grey = grey
+        self.size = size
 
     def __len__(self):
         return len(self.elements)
@@ -29,7 +30,7 @@ class RSDataset(Dataset):
         image = Image.open(img_name)
         if self.grey:
             image = image.convert('L')
-        image = image.resize(size)
+        image = image.resize(self.size)
 
         if self.transform:
             image = self.transform(image)
