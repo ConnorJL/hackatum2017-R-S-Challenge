@@ -18,7 +18,7 @@ class RSDataset(Dataset):
         for i in l:
             self.elements.append(os.path.join(path, i))
 
-        with open(os.path.join(path, "labels.pkl", "rb") as f):
+        with open(os.path.join(path, "labels.pkl", "rb")) as f:
             self.labels = pkl.load(f)
         self.transform = transform
         self.grey = grey
