@@ -8,7 +8,7 @@ from torch.utils.data import Dataset
 
 
 class RSDataset(Dataset):
-    def __init__(self, path, grey=False, transform=None, train=True, size=(360, 200)):
+    def __init__(self, path, grey=False, transform=None, train=True, size=(180, 100)):
         with open(os.path.join(path, "master.pkl"), "rb") as f:
             if train:
                 self.elements = pkl.load(f)["train"]
