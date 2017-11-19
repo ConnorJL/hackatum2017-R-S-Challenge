@@ -32,7 +32,7 @@ else:
     l.sort()
     resume_path = os.path.join(net, "checkpoint" + "_"+ str(l[-1]) + ".pth.tar")
 
-
+debug = True
 if __name__ == "__main__":
     model = network()
     optimizer = torch.optim.Adam(model.parameters())
@@ -40,7 +40,7 @@ if __name__ == "__main__":
     train_data = RSDataset(master_list_location, grey=True, transform=preprocess)
     train_dataloader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=2)
     print("Number of parameters: ", sum(param.numel() for param in model.parameters()))
-
+    start_epoch = 0
     if restore:
         print("=> loading checkpoint '{}'".format(resume_path))
         checkpoint = torch.load(args.resume)
@@ -53,9 +53,11 @@ if __name__ == "__main__":
     for i in range(start_epoch, num_epochs):
         for e in train_dataloader:
             model.zero_grads()
+            if debug:
+                print(e["labels"])
 
             out = model(e["image"])
-            loss = criterion(out, e["labels"])
+            loss = criterion(e["labels"], out)
 
             loss.backward()
             optmizer.step()
