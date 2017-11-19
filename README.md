@@ -1,4 +1,15 @@
 # hackatum2017-R-D-Challenge
+
+## How it works
+
+Not really all that well. In its current state, the code is a bit of a mess in some spots (though others are quite clean!) and should definitely not be used in production. 
+
+**dataset.py** provides a class for loading the R&S data. It expects **labels.pkl** and **master.pkl** to be in the same folder as all the image folders.
+
+**politically_correct.py** implements an example architecture for 28x28 greyscale images (which obviously isn't very useful in practice).
+
+**train.py** implements a simple training routine including loading data and the model, updating the model's parameters and creating checkpoints after every epoch.
+
 ## Inspiration
 
 Convolutional Neural Networks (CNNs) have been the state of the art in computer vision at least since Krizhevsky et al's AlexNet from 2012. The combination of the CNNs plus Max Pooling has dominated (in various tweaked forms) most academic and industrial uses of computer vision ever since. But CNNs suffer from some severe weaknesses, such as being confused by even simple changes to images such as flipping it upside down. Especially the Max Pooling operation, which is used to improve transformation invariance in CNNs, has come under fire, so far so that the "godfather of deep learning" Geoffrey Hinton has said: "The pooling operation used in convolutional neural networks is a big mistake and the fact that it works so well is a disaster."
