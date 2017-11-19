@@ -11,7 +11,7 @@ from dataset import RSDataset
 batch_size = 16
 num_epochs = 100
 net = "politically_correct"
-master_list_location = "/home/connor/Projects/hackatum2017"
+master_list_location = "/home/connor1995/train"
 
 if net == "politically_correct":
     from politically_import import network, preprocess, loss
