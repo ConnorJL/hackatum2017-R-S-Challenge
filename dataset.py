@@ -2,7 +2,7 @@ import pickle as pkl
 import torch
 import os
 
-from skimage.io import imread
+from PIL import image
 from torch.utils.data import Dataset
 
 
@@ -26,7 +26,9 @@ class RSDataset(Dataset):
 
     def __getitem__(self, idx):
         img_name = self.elements[idx].img_path
-        image = imread(img_name,as_grey=self.grey)
+        image = Image.open(img_name)
+        if self.grey:
+            image.convert('LA')
 
         if self.transform:
             image = self.transform(image)
