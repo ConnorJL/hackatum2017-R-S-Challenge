@@ -35,7 +35,7 @@ class RSDataset(Dataset):
 
         if self.transform:
             image = self.transform(image)
-        labels = np.zeros(59, dtype=np.float32)
+        labels = np.zeros(59)
         labels = labels[self.labels[self.elements[idx].labels[0].name]] = 1
         labels = torch.FloatTensor(labels)
         sample = {"image": image, "labels": labels}
