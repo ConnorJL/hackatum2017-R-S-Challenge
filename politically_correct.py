@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 import torch.nn.functional as F
+from torchvision import transforms
 
 from capsule_layer import CapsuleLayer
 
