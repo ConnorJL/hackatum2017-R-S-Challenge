@@ -34,7 +34,7 @@ class network(nn.Module):
 
 class loss(nn.Module):
     def __init__(self):
-        super(Loss, self).__init__()
+        super(loss, self).__init__()
 
     def forward(self, images, labels, classes):
         left = F.relu(0.9 - classes, inplace=True) ** 2
