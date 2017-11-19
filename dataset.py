@@ -40,3 +40,5 @@ class RSDataset(Dataset):
             labels[self.labels[self.elements[idx].labels[0].name]] = 1
         labels = torch.FloatTensor(labels)
         sample = {"image": image, "labels": labels}
+
+        return sample
