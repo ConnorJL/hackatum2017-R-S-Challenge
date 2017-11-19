@@ -4,7 +4,7 @@ from random import shuffle
 
 import numpy as np
 import torch
-from torch.utils.data import Dataloader
+from torch.utils.data import DataLoader
 
 from dataset import RSDataset
 
