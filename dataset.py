@@ -29,6 +29,6 @@ class RSDataset(Dataset):
         image = imread(img_name,as_grey=self.grey)
 
         if self.transform:
-            image = transform(image)
+            image = self.transform(image)
         labels = self.labels[self.elements[idx].labels[0]]
         sample = {"image": image, "labels": labels}
