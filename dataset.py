@@ -1,6 +1,7 @@
 import pickle as pkl
 import torch
 import os
+import numpy as np
 
 from PIL import Image
 from torch.utils.data import Dataset
@@ -34,5 +35,7 @@ class RSDataset(Dataset):
 
         if self.transform:
             image = self.transform(image)
-        labels = self.labels[self.elements[idx].labels[0]]
+        labels = np.zeros(59, dtype=np.float32)
+        labels = labels[self.labels[self.elements[idx].labels[0].name]] = 1
+        labels = torch.FloatTensor(labels)
         sample = {"image": image, "labels": labels}
