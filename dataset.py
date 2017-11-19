@@ -10,14 +10,12 @@ class RSDataset(Dataset):
     def __init__(self, path, grey=False, transform=None, train=True):
         with open(os.path.join(path, "master.pkl"), "rb") as f:
             if train:
-                l = pkl.load(f)["train"]
+                self.elements = pkl.load(f)["train"]
             else:
-                l = pkl.load(f)["test"]
+                self.elements = pkl.load(f)["test"]
 
-        self.elements = []
-        for i in l:
-            self.elements.append(os.path.join(path, i))
-
+        for e in self.elements:
+            e.img_path = os.path.join(path, e.img_path)
         with open(os.path.join(path, "labels.pkl", "rb")) as f:
             self.labels = pkl.load(f)
         self.transform = transform
