@@ -18,12 +18,12 @@ class network(nn.Module):
     def forward(self, x):
         x = F.relu(self.conv1(x), inplace=True)
         x = self.primary_capsules(x)
-        cats = self.category_capsules(x)
+        #cats = self.category_capsules(x)
 
-        cats = (cats ** 2).sum(dim=-1) ** 0.5
-        cats = F.softmax(cats)
+        #cats = (cats ** 2).sum(dim=-1) ** 0.5
+        #cats = F.softmax(cats)
 
-        return cats
+        return x
 
 
 

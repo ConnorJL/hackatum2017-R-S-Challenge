@@ -61,6 +61,7 @@ if __name__ == "__main__":
                 print(e["image"].size())
 
             out = model(e["image"])
+            print(model.primary_capsules.size())
             loss = criterion(e["labels"], out)
 
             loss.backward()
