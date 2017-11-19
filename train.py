@@ -54,9 +54,10 @@ if __name__ == "__main__":
         for e in train_dataloader:
             model.zero_grad()
             if debug:
-                print(e["image"])
+                print(e["image"].size())
 
-            out = model(e["image"])
+            img = e["image"]
+            out = model(img)
             loss = criterion(e["labels"], out)
 
             loss.backward()
