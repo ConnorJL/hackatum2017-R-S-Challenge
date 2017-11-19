@@ -51,6 +51,8 @@ if __name__ == "__main__":
         print("=> loaded checkpoint '{}' (epoch {})".format(resume_path, checkpoint['epoch']))
     model.cuda()
 
+    print(model.primary_capsules.shape())
+
     for i in range(start_epoch, num_epochs):
         for e in train_dataloader:
             model.zero_grad()
