@@ -47,6 +47,6 @@ class Loss(nn.Module):
 
 
 preprocess = transforms.Compose([
-    transforms.resize((360, 200)),
+    transforms.Resize((360, 200)),
     transforms.ToTensor()
 ])
