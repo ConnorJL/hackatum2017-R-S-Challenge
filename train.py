@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
     for i in range(start_epoch, num_epochs):
         for e in train_dataloader:
-            model.zeroGradParameters()
+            model.zero_grad()
             if debug:
                 print(e["labels"])
 
