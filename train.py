@@ -53,10 +53,10 @@ if __name__ == "__main__":
     for i in range(start_epoch, num_epochs):
         for e in train_dataloader:
             model.zero_grad()
-            if debug:
-                print(e["labels"])
+            #if debug:
+            #    print(e["labels"])
 
-            out = model.forward((e["image"]))
+            out = model.forward(e["image"])
             loss = criterion(e["labels"], out)
 
             loss.backward()
