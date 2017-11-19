@@ -57,8 +57,8 @@ if __name__ == "__main__":
             model.zero_grad()
             e["image"] = Variable(e["image"]).cuda()
             e["labels"] = Variable(e["labels"]).cuda()
-            if debug:
-                print(e["image"].size())
+            #if debug:
+            #    print(e["image"].size())
 
             out = model(e["image"])
             loss = criterion(e["labels"], out)

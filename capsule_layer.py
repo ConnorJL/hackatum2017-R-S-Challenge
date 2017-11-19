@@ -34,9 +34,9 @@ class CapsuleLayer(nn.Module):
     def forward(self, x):
         if self.num_route_nodes != -1:
             # Inputs * Weights
-            print(x[None, :, :, None, :].size())
-            print(self.route_weights[:, None, :, :,:].size())
-            priors = x[None, :, :, None, :] @ self.route_weights[:, None, :, :, :] # GG you win this time
+            # print(x[None, :, :, None, :].size())
+            # print(self.route_weights[:, None, :, :,:].size())
+            priors = x[None, :, :, None, :] @ self.route_weights[:, None, :, :, :] # GG? Not this time!
 
             # Routing algorithm
             logits = Variable(torch.zeros(*priors.size())).cuda()
