@@ -52,15 +52,15 @@ if __name__ == "__main__":
 
     for i in range(start_epoch, num_epochs):
         for e in train_dataloader:
-            model.zero_grads()
+            model.zeroGradParameters()
             if debug:
                 print(e["labels"])
 
-            out = model(e["image"])
+            out = model.forward((e["image"]))
             loss = criterion(e["labels"], out)
 
             loss.backward()
-            optmizer.step()
+            optimizer.step()
 
             save_checkpoint({
             'epoch': epoch + 1,
