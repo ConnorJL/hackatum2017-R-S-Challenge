@@ -5,7 +5,7 @@ from torchvision import transforms
 
 from capsule_layer import CapsuleLayer
 
-class Network(nn.Module):
+class network(nn.Module):
     def __init__(self):
         super(Network, self).__init__()
 
