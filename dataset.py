@@ -2,7 +2,7 @@ import pickle as pkl
 import torch
 import os
 
-from PIL import image
+from PIL import Image
 from torch.utils.data import Dataset
 
 
