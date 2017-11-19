@@ -56,7 +56,7 @@ if __name__ == "__main__":
             if debug:
                 print(e["image"])
 
-            out = model.forward(e["image"])
+            out = model(e["image"])
             loss = criterion(e["labels"], out)
 
             loss.backward()
