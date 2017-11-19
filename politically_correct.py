@@ -22,7 +22,7 @@ class network(nn.Module):
 
         cats = (cats ** 2).sum(dim=-1) ** 0.5
         cats = F.softmax(cats)
-        print(x.size())
+        # print(x.size())
         return cats
 
 
