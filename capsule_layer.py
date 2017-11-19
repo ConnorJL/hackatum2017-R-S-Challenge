@@ -28,7 +28,7 @@ class CapsuleLayer(nn.Module):
     def squash(self, tensor, dim=-1):
         squared_norm = (tensor ** 2).sum(dim=dim, keepdim=True)
         scale = squared_norm / (1 + squared_norm)
-        return scale * tensor / torch.squrt(squared_norm)
+        return scale * tensor / torch.sqrt(squared_norm)
 
     def forward(self, x):
         if self.num_route_nodes != -1:
