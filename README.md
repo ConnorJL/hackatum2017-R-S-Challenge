@@ -1,4 +1,4 @@
-# hackatum2017-R-D-Challenge
+# hackatum2017-R-S-Challenge
 
 ## How it works
 
