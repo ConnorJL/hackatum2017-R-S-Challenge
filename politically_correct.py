@@ -12,7 +12,7 @@ class network(nn.Module):
         self.conv1 = nn.Conv2d(in_channels=1, out_channels=128, kernel_size=3, stride=1)
 
         self.primary_capsules = CapsuleLayer(num_capsules=8, num_route_nodes=-1, in_channels=128, out_channels=32, kernel_size=3, stride=2)
-        self.category_capsules = CapsuleLayer(num_capsules=59, num_route_nodes=135168, in_channels = 32, out_channels=16)
+        self.category_capsules = CapsuleLayer(num_capsules=59, num_route_nodes=100, in_channels = 32, out_channels=16)
 
 
     def forward(self, x):
