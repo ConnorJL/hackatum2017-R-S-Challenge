@@ -25,29 +25,29 @@ class CapsuleLayer(nn.Module):
             # Lower level is a conv net
             self.capsules = nn.ModuleList([nn.Conv2d(in_channels, out_channels, kernel_size=kernel_size, stride=stride, padding=0) for _ in range(num_capsules)])
 
-        def squash(self, tensor, dim=-1):
-            squared_norm = (tensor ** 2).sum(dim=dim, keepdim=True)
-            scale = squared_norm / (1 + squared_norm)
-            return scale * tensor / torch.squrt(squared_norm)
+    def squash(self, tensor, dim=-1):
+        squared_norm = (tensor ** 2).sum(dim=dim, keepdim=True)
+        scale = squared_norm / (1 + squared_norm)
+        return scale * tensor / torch.squrt(squared_norm)
 
-        def forward(self, x):
-            if self.num_route_nodes != -1:
-                # Inputs * Weights
-                priors = x[None, :, :, None, :] @ self.route_weights[:, None, :, :, :]
+    def forward(self, x):
+        if self.num_route_nodes != -1:
+            # Inputs * Weights
+            priors = x[None, :, :, None, :] @ self.route_weights[:, None, :, :, :]
 
-                # Routing algorithm
-                logits = Variable(torch.zeros(*priors.size())).cuda()
-                for i in range(self.num_iterations):
-                    probs = softmax(logits, dim=2)
-                    outputs = self.squash((probs * priors).sum(dim=2, keepdim=True))
+            # Routing algorithm
+            logits = Variable(torch.zeros(*priors.size())).cuda()
+            for i in range(self.num_iterations):
+                probs = softmax(logits, dim=2)
+                outputs = self.squash((probs * priors).sum(dim=2, keepdim=True))
 
-                    if i != self.num_iterations - 1:
-                        delta_logits = (priors * outputs).sum(dim=-1, keepdim=True)
-                        logits = logits + delta_logits
+                if i != self.num_iterations - 1:
+                    delta_logits = (priors * outputs).sum(dim=-1, keepdim=True)
+                    logits = logits + delta_logits
 
-            else:
-                outputs = [capsule(x).view(x.size(0), -1, 1) for capsule in self.capsules]
-                outputs = torch.cat(outputs, dim=-1)
-                outputs = self.squash(outputs)
+        else:
+            outputs = [capsule(x).view(x.size(0), -1, 1) for capsule in self.capsules]
+            outputs = torch.cat(outputs, dim=-1)
+            outputs = self.squash(outputs)
 
-            return outputs
+        return outputs
