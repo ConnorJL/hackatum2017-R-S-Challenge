@@ -34,7 +34,7 @@ class CapsuleLayer(nn.Module):
         if self.num_route_nodes != -1:
             # Inputs * Weights
             print(x[None, :, :, None, :].size())
-            print(self.route_weights[:, None, :, :,:].size)
+            print(self.route_weights[:, None, :, :,:].size())
             priors = x[None, :, :, None, :] @ self.route_weights[:, None, :, :, :]
 
             # Routing algorithm
