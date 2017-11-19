@@ -15,7 +15,7 @@ class network(nn.Module):
         self.category_capsules = CapsuleLayer(num_capsules=59, num_route_nodes=32 * 6 * 6, in_channels = 8, out_channels=16)
 
 
-    def forward(x):
+    def forward(self, x):
         x = F.relu(self.conv1(x), inplace=True)
         x = self.primary_capsules(x)
         cats = self.category_capsules(x)
