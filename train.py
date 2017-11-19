@@ -54,8 +54,8 @@ if __name__ == "__main__":
     for i in range(start_epoch, num_epochs):
         for e in train_dataloader:
             model.zero_grad()
-            e["image"] = Variable(e["image"])
-            e["labels"] = Variable(e["labels"])
+            e["image"] = Variable(e["image"]).cuda()
+            e["labels"] = Variable(e["labels"]).cuda()
             if debug:
                 print(e["image"].size())
 
