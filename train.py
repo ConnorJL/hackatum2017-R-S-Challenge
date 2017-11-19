@@ -5,6 +5,7 @@ from random import shuffle
 import numpy as np
 import torch
 from torch.utils.data import DataLoader
+from torch.autograd import Variable
 
 from dataset import RSDataset
 
@@ -53,17 +54,18 @@ if __name__ == "__main__":
     for i in range(start_epoch, num_epochs):
         for e in train_dataloader:
             model.zero_grad()
+            e["image"] = Variable(e["image"])
+            e["labels"] = Variable(e["labels"])
             if debug:
                 print(e["image"].size())
 
-            img = e["image"]
-            out = model(img)
+            out = model(e["image"])
             loss = criterion(e["labels"], out)
 
             loss.backward()
             optimizer.step()
 
-            save_checkpoint({
+        save_checkpoint({
             'epoch': epoch + 1,
             'arch': net,
             'state_dict': model.state_dict(),
