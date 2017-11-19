@@ -1,6 +1,7 @@
 import torch
 import torch.nn.functional as F
 from torch import nn
+from torch.autograd import Variable
 
 
 def softmax(input, dim=1):
