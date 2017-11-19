@@ -16,7 +16,7 @@ class RSDataset(Dataset):
 
         for e in self.elements:
             e.img_path = os.path.join(path, e.img_path)
-        with open(os.path.join(path, "labels.pkl", "rb")) as f:
+        with open(os.path.join(path, "labels.pkl"), "rb") as f:
             self.labels = pkl.load(f)
         self.transform = transform
         self.grey = grey
