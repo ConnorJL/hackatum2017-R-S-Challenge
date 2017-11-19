@@ -28,7 +28,7 @@ class RSDataset(Dataset):
         img_name = self.elements[idx].img_path
         image = Image.open(img_name)
         if self.grey:
-            image.convert('L')
+            image.convert('1')
 
         if self.transform:
             image = self.transform(image)
