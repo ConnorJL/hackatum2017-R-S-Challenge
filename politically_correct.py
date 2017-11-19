@@ -32,7 +32,7 @@ class network(nn.Module):
 
 
 
-class Loss(nn.Module):
+class loss(nn.Module):
     def __init__(self):
         super(Loss, self).__init__()
 
