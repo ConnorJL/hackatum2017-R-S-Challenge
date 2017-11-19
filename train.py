@@ -14,7 +14,7 @@ net = "politically_correct"
 master_list_location = "/home/connor1995/train"
 
 if net == "politically_correct":
-    from politically_import import network, preprocess, loss
+    from politically_correct import network, preprocess, loss
 
 def save_checkpoint(state, filename='checkpoint'):
     filename = os.path.join(net, filename+ "_" + str(state["epoch"]) + ".pth.tar")
